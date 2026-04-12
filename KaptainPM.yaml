@@ -1,0 +1,23 @@
+apiVersion: kaptain.org/1.8
+kind: spec-check-filter-release
+metadata:
+  description: "Manifests contract schema - JSON Schema for contract files accompanying manifest packages"
+
+spec:
+  layers:
+    - layer-github-flow-strict:[1.2,2.0)
+  global:
+    release:
+      versioning:
+        maxParts: '2'
+  main:
+    specBuild:
+      type: schema
+    docker:
+      platform: linux/amd64,linux/arm64
+    hooks:
+      postDockerTests: .github/bin/verify-schema-on-examples.bash
+  platform:
+    githubActions:
+      release:
+        verbatimFiles: 'src/examples/contract-full.yaml,src/examples/contract-min.yaml'
