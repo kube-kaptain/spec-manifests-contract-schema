@@ -1,0 +1,50 @@
+apiVersion: kaptain.org/manifests-contract/1.1
+kind: kubernetes-bundle
+
+metadata:
+  description: "Vendored Envoy Gateway helm chart rendered to plain kubernetes manifests"
+
+tokens:
+  delimiterStyle: shell
+  nameStyle: PascalCase
+
+config:
+  required:
+    - EnvironmentDockerRegistryAndNamespace
+    - Environment
+    - CpuRequest
+    - CpuLimit
+    - Memory
+    - Replicas
+  noDefault:
+    - EnvironmentDockerRegistryAndNamespace
+    - Environment
+  defaults:
+    CpuRequest: "100m"
+    CpuLimit: "500m"
+    Memory: "512Mi"
+    Replicas: "3"
+
+compatibility:
+  automaticConversion:
+    - shell-camelCase
+    - shell-UPPER_SNAKE
+    - shell-lower_snake
+    - shell-lower-kebab
+    - shell-UPPER-KEBAB
+    - shell-lower.dot
+    - shell-UPPER.DOT
+    - mustache-PascalCase
+    - mustache-camelCase
+    - at-sign-PascalCase
+    - dollar-sign-PascalCase
+    - percent-PascalCase
+    - hash-PascalCase
+    - erb-PascalCase
+    - stringtemplate-PascalCase
+  repackageRequired:
+    - double-curly-PascalCase
+    - helm-PascalCase
+    - github-actions-PascalCase
+    - blade-PascalCase
+    - xml-PascalCase
