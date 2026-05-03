@@ -35,13 +35,12 @@ properties:
 
   kind:
     type: string
-    enum:
-      - kubernetes-app
-      - kubernetes-bundle
-      - kubernetes-product
+    pattern: "^[a-z][a-z0-9]*(-[a-z0-9]+)+$"
     description: >
-      The category of manifest package. Determines how consumers should
-      handle this contract.
+      The build kind that produced this contract (e.g. kubernetes-app-manifests,
+      kubernetes-bundle, kubernetes-product-aggregate). Lowercase kebab-case;
+      at least two hyphen-separated segments. Mirrors the BUILD_KIND of the
+      upstream pipeline so consumers can identify provenance.
 
   metadata:
     type: object
